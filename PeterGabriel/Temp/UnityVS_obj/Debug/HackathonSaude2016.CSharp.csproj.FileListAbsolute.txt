@@ -1,0 +1,15 @@
+E:\Dropbox\Profissional\Projects\HackathonSaude2016\Temp\UnityVS_bin\Debug\Assembly-CSharp.dll
+E:\Dropbox\Profissional\Projects\HackathonSaude2016\Temp\UnityVS_bin\Debug\Assembly-CSharp.pdb
+E:\Dropbox\Profissional\Projects\HackathonSaude2016\Temp\UnityVS_bin\Debug\UnityEditor.dll
+E:\Dropbox\Profissional\Projects\HackathonSaude2016\Temp\UnityVS_bin\Debug\UnityEngine.Analytics.dll
+E:\Dropbox\Profissional\Projects\HackathonSaude2016\Temp\UnityVS_bin\Debug\UnityEngine.dll
+E:\Dropbox\Profissional\Projects\HackathonSaude2016\Temp\UnityVS_bin\Debug\UnityEngine.Networking.dll
+E:\Dropbox\Profissional\Projects\HackathonSaude2016\Temp\UnityVS_bin\Debug\UnityEngine.UI.dll
+E:\Dropbox\Profissional\Projects\HackathonSaude2016\Temp\UnityVS_bin\Debug\UnityEngine.xml
+E:\Dropbox\Profissional\Projects\HackathonSaude2016\Temp\UnityVS_bin\Debug\UnityEngine.UI.xml
+E:\Dropbox\Profissional\Projects\HackathonSaude2016\Temp\UnityVS_bin\Debug\UnityEngine.Networking.xml
+E:\Dropbox\Profissional\Projects\HackathonSaude2016\Temp\UnityVS_bin\Debug\UnityEngine.Analytics.xml
+E:\Dropbox\Profissional\Projects\HackathonSaude2016\Temp\UnityVS_bin\Debug\UnityEditor.xml
+E:\Dropbox\Profissional\Projects\HackathonSaude2016\Temp\UnityVS_obj\Debug\HackathonSaude2016.CSharp.csprojResolveAssemblyReference.cache
+E:\Dropbox\Profissional\Projects\HackathonSaude2016\Temp\UnityVS_obj\Debug\Assembly-CSharp.dll
+E:\Dropbox\Profissional\Projects\HackathonSaude2016\Temp\UnityVS_obj\Debug\Assembly-CSharp.pdb
