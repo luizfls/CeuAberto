@@ -29,6 +29,7 @@ public class BarSpawner : MonoBehaviour
     public bool SpawnBasedOnDistance;
     public float MinDistanceToSpawn; // Distance diference between this and the last spawn;
     public float MaxDistanceToSpawn;
+    public float TimeBetweenSpawns;
     #endregion
 
     #region Internal Variables
@@ -37,7 +38,6 @@ public class BarSpawner : MonoBehaviour
     private int timeLastSpawn;
     private Vector3[] lastSpawnPosition; // The last positions spawned
     private GameObject temporaryPlatform;
-   
     #endregion
 
     // Use this for initialization
@@ -79,10 +79,15 @@ public class BarSpawner : MonoBehaviour
 
     private void SpawnPlatform()
     {
+        if (timeCounter < TimeBetweenSpawns)
+        {
+            return;
+        }
         // Time to spawn something
         temporaryPlatform = GameObject.Instantiate(PrefabToSpawn, this.transform.position
             + new Vector3(IsHorizontal ? Random.Range(-LenghtOfSpawner / 2, LenghtOfSpawner / 2) : 0,
-                           !IsHorizontal ? Random.Range(-LenghtOfSpawner / 2, LenghtOfSpawner / 2) : 0, 0),
+                          !IsHorizontal ? Random.Range(-LenghtOfSpawner / 2, LenghtOfSpawner / 2) : 0,
+                          0),
                            Quaternion.identity) as GameObject;
 
         if (OrganizeUnder != null)
@@ -91,6 +96,7 @@ public class BarSpawner : MonoBehaviour
         lastSpawnPosition[1] = lastSpawnPosition[0];
         lastSpawnPosition[0] = temporaryPlatform.transform.position;
         timeLastSpawn = timeActive;
+        timeCounter = 0;
     }
 
 }
