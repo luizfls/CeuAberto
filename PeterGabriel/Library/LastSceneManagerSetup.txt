@@ -1,4 +1,0 @@
-sceneSetups:
-- path: Assets/ValeLogo/_Scenes/AndroidVertucal.unity
-  isLoaded: 1
-  isActive: 1
