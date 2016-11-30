@@ -22,7 +22,10 @@ public class UIManager : MonoBehaviour
     public GameObject GameOverMenu;
 
     public GameObject StoryPanelFade;
-    public GameObject BOB;
+    public GameObject StoryPanel;
+    public GameObject StoryPanel2;
+    public GameObject StoryPanel3;
+
 
     public GameObject PausePanel;
 
@@ -68,27 +71,6 @@ public class UIManager : MonoBehaviour
     void Update()
     {
 
-#if UNITY_ANDROID
-            if (Input.GetTouch(0).phase == TouchPhase.Ended)
-         SceneManager.LoadScene("Game");
-                //GameObject.Find("Fade").GetComponent<Fade>().StartFading();
-
-#endif
-
-#if UNITY_EDITOR
-        // Check if there is a touch..
-        if (FadeImage != null && Input.GetMouseButtonUp(0))
-        {
-            //GameObject.Find("Fade").GetComponent<Fade>().StartFading();
-            //StoryPanelFade.GetComponent<Fade>().StartFading();
-           // IsTitleScreen = false;
-            SceneManager.LoadScene("Game");
-            //BOB.SetActive(true);
-        }
-               
-        #endif
-
-
         if ( FadeImage != null && IsTitleScreen)
         {
             if (FadeImage.GetComponent<Image>().color.a > 0.9f )
@@ -108,7 +90,26 @@ public class UIManager : MonoBehaviour
     }
     public void ContinueButtonStory()
     {
-        shouldLoad = true;
-       // GameObject.Find("Fade").GetComponent<Fade>().StartFading();
+        //shouldLoad = true;
+        StoryPanel.SetActive(false);
+        StoryPanel2.SetActive(true);
+         
     }
+    public void ContinueButtonStory2()
+    {
+        //shouldLoad = true;
+        StoryPanel2.SetActive(false);
+        StoryPanel3.SetActive(true);
+    }
+    public void ContinueButtonStory3()
+    {
+        //shouldLoad = true;
+        SceneManager.LoadScene("Game");
+    }
+
+    public void FirstClick()
+    {
+        StoryPanel.SetActive(true);
+    }
+
 }
