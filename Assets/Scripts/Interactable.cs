@@ -33,6 +33,8 @@ public class Interactable : MonoBehaviour
         if (this.tag == "Paper" && col.tag == "Player")
         {
             GameManager.Instance.PaperCount++;
+            GameManager.Instance.TotalPapersCollected++;
+            GameManager.Instance.TimeRemaining += 15;
             GameManager.DestroyObject(this.gameObject);
             SoundManager.Instance.PlayPaperPickup();
         }

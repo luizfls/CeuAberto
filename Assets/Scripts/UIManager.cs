@@ -18,6 +18,8 @@ public class UIManager : MonoBehaviour
     public Button Home;
     public Text Score;
     public Text Level;
+    public Text TotalPapers;
+    public Text TimeRemaining;
 
     public GameObject GameOverMenu;
 
@@ -26,8 +28,7 @@ public class UIManager : MonoBehaviour
     public GameObject StoryPanel2;
     public GameObject StoryPanel3;
 
-
-    public GameObject PausePanel;
+    public GameObject PauseMenu;
 
     private GameObject FadeImage;
     private bool shouldLoad;
@@ -53,14 +54,40 @@ public class UIManager : MonoBehaviour
     {
         Time.timeScale = 0;        
         Home = GameObject.Find("HomeButton").GetComponent<Button>();
-        PausePanel.SetActive(true);
+        PauseMenu.SetActive(true);
 
     }
 
     public void ActivateHomeMenu()
     {
-        SceneManager.LoadScene("MainMenu");
+        //SceneManager.LoadScene("MainMenu");
+        GameOverMenu.SetActive(false);
+        GameManager.Instance.RestartAfterGameOver();
         Time.timeScale = 1;
+    }
+
+    public void PauseGame()
+    {
+        Time.timeScale = 0;
+        GameObject.Find("Player").GetComponent<AccelerometerController>().enabled = false;
+        PauseMenu.SetActive(true);
+    }
+
+    public void UnPauseGame()
+    {
+        Time.timeScale = 1;
+        GameObject.Find("Player").GetComponent<AccelerometerController>().enabled = true;
+        PauseMenu.SetActive(false);
+    }
+
+    public void RateThisAppPLZ()
+    {
+        Application.OpenURL("market://details?id=YOUR_APP_ID");
+    }
+
+    public void LearnMore()
+    {
+        Application.OpenURL("https://en.wikipedia.org/wiki/Open_access");
     }
 
     public void ActivateGameOverMenu()
@@ -107,9 +134,22 @@ public class UIManager : MonoBehaviour
         SceneManager.LoadScene("Game");
     }
 
+    public void HomeButton()
+    {
+        //shouldLoad = true;
+        Time.timeScale = 1;
+        SoundManager.Instance.DestroyMe();
+        SceneManager.LoadScene("MainMenu");
+    }
+
     public void FirstClick()
     {
         StoryPanel.SetActive(true);
+    }
+
+    public void ExitGame()
+    {
+        Application.Quit();
     }
 
 }

@@ -28,6 +28,8 @@ public class GameManager : MonoBehaviour
     [Header("Player Variables")]
     public int PaperCount;
     public int LevelCount = 1;
+    public int TotalPapersCollected;
+    public float TimeRemaining;
 
     void Awake ()
     {
@@ -41,6 +43,7 @@ public class GameManager : MonoBehaviour
         SpawnPrefab(Paper, MinRadiusToSpawnPaper, MaxRadiusToSpawnPaper);
         SpawnPrefab(Paper, MinRadiusToSpawnPaper, MaxRadiusToSpawnPaper);
         SpawnPrefab(Paper, MinRadiusToSpawnPaper, MaxRadiusToSpawnPaper);
+        TimeRemaining = 30;
     }
 	
 	// Update is called once per frame
@@ -50,15 +53,28 @@ public class GameManager : MonoBehaviour
         {
             SpawnPrefab(AA, MinRadiusToSpawnAA, MaxRadiusToSpawnAA);
             SpawnPrefab(AF, MinRadiusToSpawnAF, MaxRadiusToSpawnAF);
-        }
-       
+        } 
+
         UIManager.Instance.Score.text = PaperCount.ToString() + "/3";
         UIManager.Instance.Level.text = "Level: "+ LevelCount.ToString();
+        UIManager.Instance.TotalPapers.text = TotalPapersCollected.ToString();
+        UIManager.Instance.TimeRemaining.text = Mathf.CeilToInt(TimeRemaining).ToString();
 
-        if(Vector3.Distance(player.transform.position, LastSpawnBaloon) >= DistanceToShowBaloonAgain )
+        
+        TimeRemaining = (TimeRemaining - Time.deltaTime);
+
+        if (Vector3.Distance(player.transform.position, LastSpawnBaloon) >= DistanceToShowBaloonAgain )
         {
             LastSpawnBaloon = player.transform.position;
-            GameObject.Destroy(GameObject.Instantiate(Baloon, player.transform.position + new Vector3(0, -10, 10), Quaternion.identity), 100);
+            GameObject.Destroy(GameObject.Instantiate(Baloon, player.transform.position + new Vector3(0, -10, 10), Quaternion.identity), 60);
+        }
+
+        if ( TimeRemaining <= 0)
+        {
+            // lose game
+            UIManager.Instance.GameOverMenu.SetActive(true);
+            Time.timeScale = 0;
+            SoundManager.Instance.PlayLoseSound();
         }
 
     }
@@ -85,6 +101,7 @@ public class GameManager : MonoBehaviour
         // Lvl ++
         LevelCount++;
         PaperCount = 0;
+        TimeRemaining += 15;
 
 
         GameObject.Destroy(AAReference);
@@ -94,7 +111,25 @@ public class GameManager : MonoBehaviour
         SpawnPrefab(Paper, MinRadiusToSpawnPaper, MaxRadiusToSpawnPaper);
         SpawnPrefab(Paper, MinRadiusToSpawnPaper, MaxRadiusToSpawnPaper);
 
+    }
+
+    public void RestartAfterGameOver()
+    {
+        // Lvl ++
+        LevelCount = 0;
+        PaperCount = 0;
+        TimeRemaining = 30;
+        TotalPapersCollected = 0;
+
+
+        GameObject.Destroy(AAReference);
+        GameObject.Destroy(AFReference);
+
+        SpawnPrefab(Paper, MinRadiusToSpawnPaper, MaxRadiusToSpawnPaper);
+        SpawnPrefab(Paper, MinRadiusToSpawnPaper, MaxRadiusToSpawnPaper);
+        SpawnPrefab(Paper, MinRadiusToSpawnPaper, MaxRadiusToSpawnPaper);
 
     }
+
 
 }

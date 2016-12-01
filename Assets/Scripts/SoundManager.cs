@@ -23,45 +23,50 @@ public class SoundManager : MonoBehaviour
         AudioSourceMain = this.GetComponent<AudioSource>();
     }
 
-	// Use this for initialization
-	void Start ()
+
+    public void DestroyMe()
     {
-       
-	
-	}
-	
-	// Update is called once per frame
-	void Update () {
-	
-	}
+        GameObject.Destroy(this.gameObject);
+    }
 
     public void PlayPaperPickup()
     {
         AudioSourceMain.clip = CollectPaper;
         AudioSourceMain.Play();
+        //StartCoroutine(playRoutine(CollectPaper));
     }
 
     public void PlayClickSound()
     {
         AudioSourceMain.clip = ClickOk;
         AudioSourceMain.Play();
+        //StartCoroutine(playRoutine(ClickOk));
     }
 
     public void PlayLoseSound()
     {
-        AudioSourceMain.clip = Lose;
-        AudioSourceMain.Play();
+        StartCoroutine(playRoutine(Lose));
     }
 
     public void PlayWinSound()
     {
-        AudioSourceMain.clip = Win;
-        AudioSourceMain.Play();
+        StartCoroutine(playRoutine(Win));
     }
 
     public void PlayDeliveryAA()
     {
-        AudioSourceMain.clip = DeliveryAA;
-        AudioSourceMain.Play();
+        StartCoroutine(playRoutine(DeliveryAA));
     }
+
+    // Routine to play sounds..
+    IEnumerator playRoutine(AudioClip clip)
+    {
+        AudioTheme.volume = 0.2f;
+        AudioSourceMain.clip = clip;
+        AudioSourceMain.Play();
+        yield return new WaitForSeconds(AudioSourceMain.clip.length);
+        AudioSourceMain.Pause();
+        AudioTheme.volume = 1;
+    }
+
 }
